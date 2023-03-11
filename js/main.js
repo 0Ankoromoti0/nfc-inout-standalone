@@ -22,4 +22,4 @@ async function startscan()  {
       console.error(error)
     }
   }
-  startscan()
+  
