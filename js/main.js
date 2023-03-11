@@ -1,4 +1,5 @@
-const scan = async () => {
+async function startscan()  {
+    console.log('オレンジ')
     try {
       const reader = new NDEFReader()
       await reader.scan()
@@ -21,4 +22,4 @@ const scan = async () => {
       console.error(error)
     }
   }
-  
+  startscan()
