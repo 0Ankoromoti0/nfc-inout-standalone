@@ -6,13 +6,14 @@ const scan = async () => {
       // Scanは起動しているが、NFCタグからデータが読み込めなかった
       reader.addEventListener('error', (event) => {
         console.log(error)
+        divelement.textContent = 'エラー'
       })
   
       // データを読み込んだ
       reader.addEventListener('reading', ({ serialNumber, message }) => {
         const record = message.records[0]
         const { data, recordType } = record
-        console.log(Hello)
+        divelement.textContent = 'hello'
         // recordTypeごとにdecode処理を実行する
       })
     } catch (error) {
