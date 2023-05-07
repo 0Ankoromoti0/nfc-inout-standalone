@@ -1,4 +1,5 @@
-import { getUserInfo } from "../api/userinfo"
+import { apiLineSend } from "../api/api-line-sendmsg"
+import { getUserInfo, switchUserStat } from "../api/userinfo"
 import { nfcOnError } from "./errorhandler"
 
 export async function nfcScan() {
@@ -34,5 +35,20 @@ export async function nfcScan() {
 }
 export function nfcOnRead(serialNumber: string) {
     const userInfo = getUserInfo(serialNumber)
-    userInfo["lineID"]
+    const lineID: string = userInfo["lineID"]
+    let textSend
+    if (userInfo["in"]) {
+        textSend = `${userInfo["name"]}さんが退室しました`
+        switchUserStat(userInfo, false)
+    }else {
+        textSend = `${userInfo["name"]}さんが入室しました`
+        switchUserStat(userInfo, true)
+    }
+    apiLineSend({
+        "to" : lineID,
+        "messages" : [{
+          "type" : "text",
+          "text" : textSend
+        }]
+    })
 }

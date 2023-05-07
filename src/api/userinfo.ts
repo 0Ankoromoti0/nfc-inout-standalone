@@ -9,3 +9,7 @@ export function getUserInfo(nfcsc: string) {
     }
     
 }
+
+export function switchUserStat(userInfo: any, newstat: boolean) {
+    userInfo["in"] = newstat
+}
